@@ -41,8 +41,50 @@ select * from students
 where cohort > 2 and campus = 1
 
 --aggregate function
+-- max, min, sum, avg
 select count(*) from students;
 
 --count of students on the Provo campus
 select count(*) from students
 where campus = 1;
+
+--select unique values
+select distinct campus from students;
+
+--order by ascending
+select * from students
+order by cohort asc;
+
+--order by descending
+select * from students
+order by cohort desc;
+
+-- pagination, limits, offset
+select * from students
+where campus = 1
+limit 10 offset 10;
+
+-- ilike filters out the letters that are in
+select * from students
+where name ilike '%k%';
+
+-- updating name in the student list
+update students
+set name = 'hankie'
+where student_id = 2;
+
+-- delete student from the list
+delete from students
+where students_id = 2;
+
+select * from students;
+
+-- join two tables together
+select * from students
+join campus_data
+on(students.campus = campus_data.campus_id);
+
+
+select cohort, name, campus_data.campus, program, campus_phone from students
+join campus_data
+on(students.campus = campus_data.campus_id);
