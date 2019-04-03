@@ -1,4 +1,4 @@
-import Reach from 'react';
+import React from 'react';
 import './movieForm.css'
 
 export default function movieForm() {

@@ -1,25 +1,61 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import MovieForm from './components/addMovieForm/movieForm';
+import Header from './components/header/header';
+import MovieList from './components/movieList/movieList';
+import UserFavorites from './components/userFavorites/userFavorites';
+import axios from "axios";
 import './App.css';
 
+
 class App extends Component {
+  constructor(){
+  super ()
+    this.state = {
+      movieList: [],
+      favorites: [],
+    }
+  }
+
+  componentDidMount(){
+   this.getAllMovies();
+  }
+  getAllMovies = () => {
+    axios
+    .get("/api/movies").then(response => {
+      console.log(response.data.results)
+      this.setState({
+        movieList: response.data.results
+      });
+    });
+  };
+  addToFavorites = movie => {
+    const newMovie = {
+      title: movie.title,
+      release_date: movie.release_date,
+      poster_path: movie.poster_path,
+      popularity: movie.popularity,
+      overview: movie.overview,
+    };
+    console.log(newMovie);
+    axios.post('/api/movies', newMovie).then(res => {
+      this.setState({
+        favorites: res.data
+      });
+    });
+  }
+
   render() {
+    console.log(this.state.favorites)
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <Header />
+      <UserFavorites favorites={this.state.favorites}/>
+      <MovieForm />
+      <MovieList 
+          addToFavorites={this.addToFavorites} 
+          movieList={this.state.movieList}/>
+
+       
       </div>
     );
   }

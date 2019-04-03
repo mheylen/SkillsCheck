@@ -1,0 +1,36 @@
+app.use(function(req,res,next)
+{next()
+}
+)
+app.get('/api/users', function(req,res,next){
+    res.send(users);
+})
+}
+
+//JSON is like the information we send to users.
+
+var bodyParser = require('body-parser');
+app.use(bodyParser.json())
+
+bodyParser.json(request body)
+
+app.pose
+
+
+var app = express();
+app.use(express.static('public));
+path.join(_dirname,'public')
+);
+app.get('/apiabout',res,)
+
+STATIC FILES
+
+var app = express();
+app.use(express.static('public'))
+app.use9express.static(
+    path.join(_dirname.'public')
+)
+)
+app.get('/about', function(req,res,next){
+    res.send(info);
+});

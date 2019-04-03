@@ -1,0 +1,20 @@
+.favorites-container {
+  background: red;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  align-items: center;
+}
+
+.favorites-container > div {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 150px;
+  margin: 10px;
+}
+
+.favorites-container > div img {
+  width: 100%;
+}
