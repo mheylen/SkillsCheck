@@ -2,8 +2,12 @@
   "name": "skills",
   "version": "0.1.0",
   "private": true,
+  "main": "server/index.js",
+  "proxy": "http://localhost:4000",
   "dependencies": {
+    "dotenv": "^7.0.0",
     "express": "^4.16.4",
+    "massive": "^5.7.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "2.1.8"
