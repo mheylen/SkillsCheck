@@ -1,0 +1,66 @@
+/* .outer changes the look of the webiste without being responsive.
+/* .outer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    position: relative;
+    align-items: center;
+    float: right;
+    width: 25%;
+    height:30%;
+    border: 5px;
+    margin: 15px;
+  } */
+    
+.videos > img {
+    height: 100%;
+    width: 100%;
+    } 
+  
+    h3 {
+      font-size: 20px;
+      color: blue;
+      margin-top: 5px;
+    } 
+  
+      .videos {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        box-shadow: 1px 3px 4px 0px gray;
+        border-radius: 20px
+      }
+
+      button {
+        height: 25px;
+          margin: 10px;
+          box-shadow: 1px 3px 4px 0px gray;
+          border-radius: 20px
+          
+      }
+
+
+      @media(min-width: 500px) {
+          h3{
+              font-size: 15px;
+          }
+        }
+
+    @media(min-width: 500px) {
+        .outer{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        position: relative;
+        align-items: center;
+        float: right;
+        width: 25%;
+        height:30%;
+        border: 5px;
+        margin: 15px;}
+    }
+      
+      
+     
+      
+    

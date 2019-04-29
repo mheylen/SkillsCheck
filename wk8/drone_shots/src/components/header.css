@@ -1,0 +1,32 @@
+header {
+    display: flex;
+    padding: 5px 5px;
+    width: 100%;
+    background-color: black;
+    justify-content: right;
+
+}
+.nav{
+    display: flex;
+    background-color: skyblue;
+    padding: 2px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 2;
+    font-size: 20px;
+    margin: 5px;
+}
+
+
+
+/* .logo, #main-nav {
+    background-image: url("../logo.png");
+    border-radius: 60px;
+    float: left;
+    background-color: white;
+}
+.logo {
+    height: 100px;
+    width: 100px; 
+    float: left;
+} */
