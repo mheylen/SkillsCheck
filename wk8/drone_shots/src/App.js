@@ -20,13 +20,16 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <img src="" />
+        {/* <iframe width="860" height="615" src="https://www.youtube.com/embed/ubD3PU5LqpE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope" allowfullscreen></iframe> */}
         <Switch>
-          <Route exact path="/" render={() => { return <div className= "video-container"> <Dashboard /> </div>; }}/>
-          <Route exact path="/pilot" render={() => { return ( <div>Pilot Information <PilotCard /></div>
-          );
+          <ul>
+            <li>  
+              <Route exact path="/" render={() => { return <div className= "video-container"> <Dashboard /> </div>; }}/></li>
+            <li>
+              <Route exact path="/pilot" render={() => { return ( <div>Pilot Information <PilotCard /></div>
+            );
             }}
-          />
+            /></li></ul>
         </Switch>
       </div>
     );

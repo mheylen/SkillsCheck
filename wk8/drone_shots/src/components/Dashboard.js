@@ -24,15 +24,27 @@ export default class Dashboard extends Component {
     }
     render (){
         const { content } = this.state;
-
+        
         const contentDisplay = content.map(content => {
+            let newVideo = content.video.split('')
+            let copy = newVideo.slice()
+            newVideo.pop();
+            newVideo.shift()
+            let joinDatMoFo = newVideo.join('')
             return (
-            // <img src className="main-vid "></div>
-            <div className= "outer">
+                // <img src className="main-vid "></div>
+                <div className= "outer">
                 <div className="videos" key={content.content_id}>
 
                 <h3>{content.title}</h3>
+                {
+                copy[0] === '{' ? 
+                <video width="100%" height="100%" controls ><source src= {joinDatMoFo}  /> </video>
+                :
                 <img src={content.video} />
+                }
+                
+                
                 <button onClick={() => this.downloadVideo(content.content_id)}>Download Video</button>
                 </div>
             </div>

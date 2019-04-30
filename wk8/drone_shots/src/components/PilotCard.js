@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { setUsers } from "../ducks/reducer";
-import Pilot_Videos from "./Pilot_Videos"
+import Pilot_Videos from "./Pilot_Videos";
+import Stats from "./Stats"
 // import { setStore } from "../ducks/store"
 import "./header.css";
-
+import Dropzone from "react-dropzone"
+const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/de3supjrm/video/upload";
 
 
 class PilotCard extends Component {
@@ -19,7 +20,9 @@ class PilotCard extends Component {
       title: "",
       description: "",
       tag: "",
-      videoList: []
+      videoList: [],
+      uploadedFile: '',
+      cloudinaryUrl: [],
 
     };
     this.signIn = this.signIn.bind(this);
@@ -28,6 +31,37 @@ class PilotCard extends Component {
     this.upload = this.upload.bind(this);
     this.getOne = this.getOne.bind(this)
   }
+
+  onVideoDrop = (files) => {
+    console.log("onVideoDrop FILES", files)
+    this.setState({
+      uploadedFile: files[0]
+    });
+    
+    this.handleVideoUpload(files[0]);
+  }
+
+  handleVideoUpload = (file) => {
+
+    axios.get('/api/upload').then(response => {
+
+        let formData = new FormData();
+        formData.append("signature", response.data.signature)
+        formData.append("api_key", "276529187845597");
+        formData.append("timestamp", response.data.timestamp)
+        formData.append("file", file);
+
+        axios.post(CLOUDINARY_UPLOAD_URL, formData).then(response => {
+          this.setState({
+            cloudinaryUrl: [...this.state.cloudinaryUrl, response.data.secure_url]
+            })
+        }).catch( err => {
+        console.log(err);
+        })
+
+    })
+}
+  
 
   componentDidMount() {
     axios.get("/api/users").then(res => {
@@ -42,14 +76,15 @@ class PilotCard extends Component {
   }
   
 
+
   upload() {
     const storePayload = {
       title: this.state.title,
       description: this.state.description,
       tag: this.state.tag,
-      video: this.state.video,
+      video: this.state.cloudinaryUrl,
       id: this.props.users.id
-    };
+    };console.log(this.state.cloudinaryUrl, "CloudinaryUrl")
     axios.post("/api/content", storePayload).then(res => {
       alert("Post Added") 
       this.getOne();
@@ -107,6 +142,8 @@ console.log("Hit")
   
 }
 
+
+
   render() {
     const { email, password, video, description, tag, title, videoList} = this.state;
     const { users } = this.props;
@@ -144,14 +181,25 @@ console.log("Hit")
               {JSON.stringify(this.state.users)}
               {users ?
               <li>
-                  <input
-                    placeholder="Upload Video"
-                    name="video"
-                    value={video}
-                    onChange={e =>
-                      this.changeHandler(e.target.name, e.target.value)
-                    }
-                  />
+                  <Dropzone  
+                    onDrop={this.onVideoDrop} accept="video/*"multiple={false}>
+                    {({getRootProps, getInputProps}) => (
+                      <section>
+                        <div {...getRootProps()}>
+                          <input {...getInputProps()} />
+                          <button id="dropzone">Click to select files, or drop file here</button>
+                        </div>
+                      </section>
+                    )}
+                  </Dropzone>
+                    <input placeholder="Upload Video"
+                     name="video"
+                     value={video}
+                     onChange={e =>
+                       this.changeHandler(e.target.name, e.target.value)
+                     }
+                  /> 
+                  
 
                   <input
                       placeholder="title"
@@ -187,9 +235,7 @@ console.log("Hit")
               } </ul>
               <ul>
                   {users ?
-              
-              <Pilot_Videos/>
-
+              <Pilot_Videos />
                 : null
               } 
 

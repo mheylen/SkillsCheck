@@ -24,24 +24,31 @@ module.exports = {
    update: (req, res) => {
        const dbInstance = req.app.get('db');
        const {params, query} = req;
-       dbInstance.update_content()
+       dbInstance.update_videos()
        .then( () => res.sendStatus(200) ).catch(err => {
            res.status(500).send({errorMessage: "Error while updating"}) 
            console.log(err)
        })
    },
    delete: (req, res, next) => {
-       const dbInstance = req.app.get('db');
        const {id} = req.params;
-       dbInstance.delete_content().then (() => res.sendStatus(200)).catch(err => {
-           res.status(500).send({errorMEssage: "Error trying to delete"})
-           console.log(err)
-       })
+       let index = videos.findIndex(videos => videos.videos_id === +id)
+       if(index !== -1){
+           videos.splice(index, 1);
+           res.status(200).send(videos)
+       }else{
+           res.status(404).send("droners flying")
+       }
+    //    const dbInstance = req.app.delete('db');
+    //    dbInstance.delete_videos().then (() => res.sendStatus(200)).catch(err => {
+    //        res.status(500).send({errorMEssage: "Error trying to delete"})
+    //        console.log(err)
+    //    })
    },
    getOne: (req, res) => {
        const db = req.app.get("db")
 console.log(req.session,"GetOne")
-       db.get_one(req.session.users.id).then( content => {
+       db.get_one(req.session.user.id).then( content => {
            console.log(content,"Content LABEL");
           res.status(200).json(content);
     })

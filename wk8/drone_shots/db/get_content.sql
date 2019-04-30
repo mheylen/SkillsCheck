@@ -1,1 +1,1 @@
-select * from videos;
+select * from videos order by videos_id desc;

@@ -20,7 +20,6 @@ module.exports = {
 
 
 
-
     //   db.find_users(email).then(users => {
     //     if (users[0]) {
     //       if (password === users[0].password) {
@@ -48,6 +47,7 @@ module.exports = {
       db.find_users(email).then(users => {
         
         if (users.length) {
+          console.log(users, "it exists")
           res.status(200).send("That user already exists");
         } else {
           let saltRounds = 12;
