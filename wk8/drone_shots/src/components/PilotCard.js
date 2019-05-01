@@ -187,18 +187,18 @@ console.log("Hit")
                       <section>
                         <div {...getRootProps()}>
                           <input {...getInputProps()} />
-                          <button id="dropzone">Click to select files, or drop file here</button>
+                          <button id="dropzone">Click or drop files here</button>
                         </div>
                       </section>
                     )}
                   </Dropzone>
-                    <input placeholder="Upload Video"
+                    {/* <input placeholder="Upload Video"
                      name="video"
                      value={video}
                      onChange={e =>
                        this.changeHandler(e.target.name, e.target.value)
                      }
-                  /> 
+                  />  */}
                   
 
                   <input

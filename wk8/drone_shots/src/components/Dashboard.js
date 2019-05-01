@@ -36,10 +36,10 @@ export default class Dashboard extends Component {
                 <div className= "outer">
                 <div className="videos" key={content.content_id}>
 
-                <h3>{content.title}</h3>
+                <h3 autoCapitalize>{content.title}</h3>
                 {
                 copy[0] === '{' ? 
-                <video width="100%" height="100%" controls ><source src= {joinDatMoFo}  /> </video>
+                <video height= "100%" width= "100%" controls ><source src= {joinDatMoFo}  /> </video>
                 :
                 <img src={content.video} />
                 }
