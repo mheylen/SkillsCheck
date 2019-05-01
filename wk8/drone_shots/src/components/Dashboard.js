@@ -11,9 +11,11 @@ export default class Dashboard extends Component {
             content: []
         };
         this.getAllContent = this.getAllContent.bind(this);
+    
     }
     componentDidMount() {
         this.getAllContent();
+     
     }
     getAllContent() {
         axios.get("/api/content").then(res => {
@@ -22,6 +24,8 @@ export default class Dashboard extends Component {
             });
         });
     }
+
+  
     render (){
         const { content } = this.state;
         
@@ -36,16 +40,19 @@ export default class Dashboard extends Component {
                 <div className= "outer">
                 <div className="videos" key={content.content_id}>
 
-                <h3 autoCapitalize>{content.title}</h3>
                 {
                 copy[0] === '{' ? 
                 <video height= "100%" width= "100%" controls ><source src= {joinDatMoFo}  /> </video>
                 :
                 <img src={content.video} />
                 }
+                <a href={joinDatMoFo} download={content.video} className = "button">Download
+                <source src={joinDatMoFo}/>
+                </a>
+                {/* <button onClick= {() => {content.video}}> Download Video </button> */}
                 
                 
-                <button onClick={() => this.downloadVideo(content.content_id)}>Download Video</button>
+                
                 </div>
             </div>
         
