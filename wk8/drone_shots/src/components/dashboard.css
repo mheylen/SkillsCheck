@@ -1,44 +1,64 @@
-/* .outer changes the look of the webiste without being responsive.
-/* .outer {
+/* .outer changes the look of the webiste without being responsive. */
+.outer {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    position: relative;
+    flex-wrap: wrap;
     align-items: center;
-    float: right;
+    
     width: 25%;
     height:30%;
     border: 5px;
     margin: 15px;
-  } */
+  }
+
+/* .main-vid{
+  display:flex;
+  background: peachpuff;
+  height: 500px;
+}
+
+.icons{
+  display: flex;
+  background-color: cornflowerblue;
+  height: 250px;
+  padding-bottom: 20px
+} */
     
-.videos > img {
-    height: 100%;
-    width: 100%;
-    } 
-  
-    h3 {
-      font-size: 20px;
-      color: blue;
-      margin-top: 5px;
-    } 
-  
-      .videos {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        box-shadow: 1px 3px 4px 0px gray;
-        border-radius: 20px
+
+
+h3 {
+  font-size: 20px;
+  color: blue;
+  margin-top: 5px;
+} 
+
+.vidz {
+  display: flex;
+  align-self: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  position: relative;
+  align-content: center;
+  height: 75%;
+  width: 75%;
+   
+    
+    
+        /* box-shadow: 1px 3px 4px 0px gray; */
+        
       }
 
-      button {
-        height: 25px;
-          margin: 10px;
-          box-shadow: 1px 3px 4px 0px gray;
-          border-radius: 20px
+      
+
+      .buttonz {
+        display: flex;
+        align-items: center;
+        padding: 5px  
+        
+          
           
       }
-
 
       @media(min-width: 500px) {
           h3{

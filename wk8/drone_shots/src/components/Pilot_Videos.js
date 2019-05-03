@@ -4,15 +4,17 @@ import { Link } from "react-router-dom";
 
 
 
+
 export default class Pilot_Videos extends Component {
     constructor (props) {
         super(props);
 
         this.state = {
-            content: []
+            content: [],
+            edit: false
         };
         this.getOne = this.getOne.bind(this);
-        
+        this.deleteVideo = this.deleteVideo.bind(this);
     }
     componentDidMount() {
         this.getOne();
@@ -26,9 +28,41 @@ export default class Pilot_Videos extends Component {
         });
     }
 
+    deleteVideo (id){
+        console.log(id, "An ID")
+        axios
+        .delete(`/api/content/${id}`).then(res => {
+            console.log(axios, "Axios call")
+          this.setState({
+            content: res.data
+          });
+        });
+      }
+      updateVideo(id){
+        const { title, description, tag } = this.state;
+        const payload = {
+          title,
+          description,
+          tag
+        };
+        axios.put(`/api/content/${id}`, payload).then(() => {
+          this.clearForm();
+          this.props.history.push("/");
+        });
+      };
+    
+      clearForm = () => {
+        this.setState({
+          title:"",
+          description:"",
+          tag: ""
+        });
+      }
+
+
     
     render (){
-        const { content } = this.state;
+        const { content, edit } = this.state;
 
         const contentDisplay = content.map(content => {
             let newVideo = content.video.split('')
@@ -36,17 +70,28 @@ export default class Pilot_Videos extends Component {
             newVideo.pop();
             newVideo.shift()
             let joinDatMoFo = newVideo.join('')
+            console.log(content, "Content Videos")
             return (
                 <div key={content.content_id}>
                 <h1>{content.title}</h1>
                 {
                 copy[0] === '{' ? 
-                <video width="50px" height="50px" controls ><source src= {joinDatMoFo}  /> </video>
+                <video className="vidz" controls ><source src= {joinDatMoFo}  /> </video>
                 :
-                <img src={content.video} />
+                <img src={content.video} alt=""/>
                 }
-                <button onClick={() => content.delete(content.id)}>delete</button>
-                
+                <button onClick={() => this.deleteVideo(content.videos_id)} >Delete</button>
+                <Link to={`/edit/${content.videos_id}`}>Edit</Link>
+                <button onClick={() => {
+                    this.clearForm();
+                    if(edit) {
+                        this.props.history.push("/");
+                    }
+                }}
+                >
+                Cancel
+                </button>
+
                 </div>
             )
         });

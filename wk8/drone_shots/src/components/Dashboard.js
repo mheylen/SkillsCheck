@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import StripeCheckout from 'react-stripe-checkout'
 import "./dashboard.css"
+
 
 export default class Dashboard extends Component {
     constructor (props) {
@@ -11,11 +13,10 @@ export default class Dashboard extends Component {
             content: []
         };
         this.getAllContent = this.getAllContent.bind(this);
-    
+        
     }
     componentDidMount() {
         this.getAllContent();
-     
     }
     getAllContent() {
         axios.get("/api/content").then(res => {
@@ -25,9 +26,9 @@ export default class Dashboard extends Component {
         });
     }
 
-  
     render (){
         const { content } = this.state;
+        
         
         const contentDisplay = content.map(content => {
             let newVideo = content.video.split('')
@@ -35,29 +36,29 @@ export default class Dashboard extends Component {
             newVideo.pop();
             newVideo.shift()
             let joinDatMoFo = newVideo.join('')
+            
+            
             return (
-                // <img src className="main-vid "></div>
-                <div className= "outer">
-                <div className="videos" key={content.content_id}>
+                <div className="outer">
+                <div className= "videos" key={content.content_id}>
+                
 
                 {
-                copy[0] === '{' ? 
-                <video height= "100%" width= "100%" controls ><source src= {joinDatMoFo}  /> </video>
-                :
-                <img src={content.video} />
+                    copy[0] === '{' ? 
+                    <video controls className="vidz"><source src= {joinDatMoFo}  /> </video>
+                    :
+                    <img src={content.video} />
                 }
-                <a href={joinDatMoFo} download={content.video} className = "button">Download
-                <source src={joinDatMoFo}/>
+                < StripeCheckout token={this.onToken} stripeKey="pk_test_QbPg6qWGZHyNleXltFbwJRvp00uuYGPbfD" />
+                <a href={joinDatMoFo} download={content.video}  className = "buttonz" >Download<source src={joinDatMoFo}/>
                 </a>
-                {/* <button onClick= {() => {content.video}}> Download Video </button> */}
-                
                 
                 
                 </div>
             </div>
         
-            )
-        });
-        return <div className="videos">{contentDisplay}</div>
-    }
+        )
+    });
+    return <div className="videos">{contentDisplay}</div>
+}
 }

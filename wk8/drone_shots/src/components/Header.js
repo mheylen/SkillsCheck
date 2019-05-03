@@ -9,10 +9,12 @@ class Header extends Component {
   render() {
     return (
       <header>
-          <div className= "nav">
+          <div className= "home">
                 < NavLink exact to="/" activeStyle={{ color: "red" }}>
                   Home
                 </NavLink>
+                </div>
+          <div className="pilots">
                 <NavLink to="/pilot" activeStyle={{ color: "red" }}>
                   Pilots 
                 </NavLink>

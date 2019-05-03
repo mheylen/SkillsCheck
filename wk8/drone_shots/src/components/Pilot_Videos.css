@@ -1,0 +1,10 @@
+.vidz {
+    display: flex;
+    align-self: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    position: relative;
+    align-content: center;
+    height: 25px;
+    width: 25px;
+}

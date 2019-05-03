@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { setUsers } from "../ducks/reducer";
 import Pilot_Videos from "./Pilot_Videos";
 import Stats from "./Stats"
+import { Link } from 'react-router-dom'
 // import { setStore } from "../ducks/store"
 import "./header.css";
 import Dropzone from "react-dropzone"
@@ -23,13 +24,14 @@ class PilotCard extends Component {
       videoList: [],
       uploadedFile: '',
       cloudinaryUrl: [],
+      
 
     };
     this.signIn = this.signIn.bind(this);
     this.register = this.register.bind(this);
     this.logout = this.logout.bind(this);
     this.upload = this.upload.bind(this);
-    this.getOne = this.getOne.bind(this)
+    this.getOne = this.getOne.bind(this);
   }
 
   onVideoDrop = (files) => {
@@ -46,11 +48,15 @@ class PilotCard extends Component {
     axios.get('/api/upload').then(response => {
 
         let formData = new FormData();
+        console.log(formData, "formData")
         formData.append("signature", response.data.signature)
+        // formData["signature"] = response.data.signature;
         formData.append("api_key", "276529187845597");
+        // formData["api_key" ] = "276529187845597"
         formData.append("timestamp", response.data.timestamp)
+        // formData["timestamp"] = response.data.timestamp
         formData.append("file", file);
-
+        formData["file"] = file
         axios.post(CLOUDINARY_UPLOAD_URL, formData).then(response => {
           this.setState({
             cloudinaryUrl: [...this.state.cloudinaryUrl, response.data.secure_url]
@@ -64,17 +70,27 @@ class PilotCard extends Component {
   
 
   componentDidMount() {
+    // const { id } = this.props.match.params;
+    // if (id) {
+    //   axios.get(`/api/content/${id}`).then(res => {
+    //     const { title, description, tag } = res.data;
+    //     this.setState({
+    //       title,
+    //       description,
+    //       tag,
+    //       edit: true
+    //     });
+    //   });
+    // }
     axios.get("/api/users").then(res => {
       console.log(res)
       this.props.setUsers(res.data);
     });
     this.getOne();
-
-  //   axios.get("/api/content").then(res => {
-  //     this.props.setStore(res.data);
-  //   })
+ 
   }
   
+ 
 
 
   upload() {
@@ -144,9 +160,11 @@ console.log("Hit")
 
 
 
+
   render() {
     const { email, password, video, description, tag, title, videoList} = this.state;
     const { users } = this.props;
+    
     console.log(users)
     return (
         <div>
@@ -263,59 +281,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(PilotCard);
-
-// import React, { Component } from "react";
-// import { connect } from "react-redux";
-// import axios from "axios";
-
-// class PilotCard extends Component {
-//   constructor(){
-//     super()
-//       this.state ={
-//         contentList:[]
-//       }
-//   }
-
-//   componentDidMount(){
-//     this.getAllContent();
-//   };
-
-// getAllContent = () => {
-//   axios.get("/api/content").then(response => {
-//     console.log(response.data.results)
-//     this.setState({
-//       contentList: response.data.results
-//     });
-//   });
-// };
-
-// deleteFromList = (id) => {
-//   axios.delete(`/api/content/${id}`).then(response => {
-//     this.setState({
-//       contentList: response.data
-//     })
-//   })
-// }
-
-//   render() {
-//     console.log();
-//     return <div>{JSON.stringify(this.props.pilot)}
-//     <ul>
-//       <li>Input Video</li>
-//       <li>Input Title</li>
-//       <li>Input Tags</li>
-//       <li>Input Description</li>
-//     </ul>
-//    What should we display here. The pilots drone videos?
-    
-//     </div>;
-//   }
-// }
-
-// const mapStateToProps = reduxState => {
-//   return {
-//     user: reduxState.user
-//   };
-// };
-
-// export default connect(mapStateToProps)(PilotCard);

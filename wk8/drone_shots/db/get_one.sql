@@ -1,1 +1,1 @@
-select video from videos where users_id = $1;
+select * from videos where users_id = $1;
