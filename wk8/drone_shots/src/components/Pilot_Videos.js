@@ -74,23 +74,17 @@ export default class Pilot_Videos extends Component {
             return (
                 <div key={content.content_id}>
                 <h1>{content.title}</h1>
+                <p>{content.description}</p>
+                <p>{content.tag}</p>
+                <button onClick={() => this.deleteVideo(content.videos_id)} >Delete</button>
+                <Link to={`/edit/${content.videos_id}`}>Edit</Link>
                 {
                 copy[0] === '{' ? 
                 <video className="vidz" controls ><source src= {joinDatMoFo}  /> </video>
                 :
                 <img src={content.video} alt=""/>
                 }
-                <button onClick={() => this.deleteVideo(content.videos_id)} >Delete</button>
-                <Link to={`/edit/${content.videos_id}`}>Edit</Link>
-                <button onClick={() => {
-                    this.clearForm();
-                    if(edit) {
-                        this.props.history.push("/");
-                    }
-                }}
-                >
-                Cancel
-                </button>
+                
 
                 </div>
             )

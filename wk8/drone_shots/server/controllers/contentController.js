@@ -65,7 +65,9 @@ module.exports = {
    updateVideo(req, res){
         const db = req.app.get("db");
         const { title, description, tag} = req.body;
-        db.update_video([title, description, tag])
+        const { id } = req.params
+        console.log("-------------------------------")
+        db.update_video([title, description, tag, id])
         .then(videos => {
             res.status(200).send(videos);
         })

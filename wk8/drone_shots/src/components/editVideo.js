@@ -14,6 +14,7 @@ export default class editVideo extends Component {
       tag: "",
       edit: false
     };
+    this.editVideo=this.editVideo.bind(this);
   }
 
   componentDidMount() {
@@ -37,18 +38,24 @@ export default class editVideo extends Component {
     });
   };
   editVideo(){
-      const {title, description, tag, id } = this.state;
+      const {title, description, tag } = this.state;
       const payload ={
         title,
         description,
         tag
       };
-      axios.put(`/api/products/${id}`, payload).then(() => {
+      axios.put(`/api/content/${this.props.match.params.id}`, payload).then(() => {
         this.clearForm();
         this.props.history.push("/")
       })
   }
-
+  clearForm () {
+    this.setState({
+      title: "",
+      description: "",
+      tags: ""
+    });
+  };
 
   render() {
     const { description, tag, title, edit} = this.state;
@@ -94,8 +101,8 @@ export default class editVideo extends Component {
         >
           Cancel
         </button>
-        <button onClick={edit ? this.editVideo : this.uploadVideo}>
-          {edit ? "Edit" : "Make Changes"}
+        <button onClick={this.editVideo }>
+          Make Changes
         </button>
       </div>
     );
