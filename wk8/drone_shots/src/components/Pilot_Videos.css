@@ -1,10 +1,10 @@
-.vidz {
-    display: flex;
+.videos {
+    
     align-self: center;
     flex-wrap: wrap;
     justify-content: space-evenly;
     position: relative;
     align-content: center;
-    height: 25px;
-    width: 25px;
+    height: 4px;
+    width: 4px;
 }
