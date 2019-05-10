@@ -1,0 +1,85 @@
+body{
+  height: 200vh;
+}
+
+header {
+  height: 90px;
+  background: linear-gradient(0.2turn, #444444, #333333);
+}
+
+header a {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+header > div {
+  height: 100%;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #444444, #333333;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header nav ul {
+  min-width: 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  position: relative;
+  z-index: 2;
+}
+header button {
+  display: none;
+}
+@media (max-width: 700px) {
+  header > div {
+    padding: 0 20px;
+  }
+  header nav {
+    position: fixed;
+    min-height: 100vh;
+    top: 0;
+    right: 0;
+    background: linear-gradient(0.2turn, #444444, #333333);
+    transform: translate(400px, 0px);
+    transition: 0.3s;
+  }
+
+  header nav ul {
+    justify-content: space-around;
+    flex-direction: column;
+    height: 300px;
+    padding: 100px;
+  }
+
+  header .show {
+    transform: translate(0, 0);
+  }
+
+  header button {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    z-index: 1;
+    display: flex;
+    height: 40px;
+    width: 40px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.363);
+    cursor: pointer;
+  }
+
+  .logo a {
+    font-size: 12px;
+  }
+}

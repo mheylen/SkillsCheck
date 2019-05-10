@@ -4,7 +4,7 @@ import "./productList.css";
 
 export default function productList(props){
 
-let mappedProduct = props.productList.map(item => {
+let mappedProducts = props.productList.map(item => {
     return (
         
         
@@ -18,4 +18,6 @@ let mappedProduct = props.productList.map(item => {
             
         </div>
     );
-})}
+})
+return <div className= "mapped-container"> {mappedProducts} </div>
+}

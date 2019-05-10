@@ -1,0 +1,83 @@
+body {
+    background: lightgray;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    color: white;
+    background-color:olivedrab;
+    font-size: 12px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* animation
+    animation-name: fun;
+    animation-duration: 4s;
+    animation-delay: .2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 2;
+    animation-fill-mode: forwards; */
+    animation: fun 1s ease-in-out .5s 2 forwards;
+
+
+}
+
+/* @keyframes fun {
+    from {
+        border-radius: 50%
+    }
+    to {
+        border-radius: 0;
+        color: blue
+    }
+} */
+
+@keyframes fun {
+    0% {
+        border-radius: 50%;
+        color: white;
+        transform: translate(0, 0);
+    }
+    50% {
+        border-radius: 0;
+        color: blue;
+        transform: translate(0, 100px);
+    }
+    100%{
+        border-radius: 50%;
+        color: orange;
+        transform: translate(0 ,0);
+    }
+}
+
+
+
+@media(max-width: 900px) and (min-width: 701px){
+    .box{
+        font-size: 25px;
+        background: purple
+    }
+}
+
+@media(max-width: 700px){
+    .box{
+        font-size: 10px;
+        background: black;
+
+    }
+}
+
+@media(max-width: 1080p){
+    .box{
+        font-size: 40px;
+        background: green
+    }
+}

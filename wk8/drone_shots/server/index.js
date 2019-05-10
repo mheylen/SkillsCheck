@@ -12,6 +12,7 @@ require("dotenv").config();
 
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
 app.use(express.json());
+app.use( express.static( `${__dirname}/../build` ) );
 
 app.use(
     session({
@@ -62,7 +63,6 @@ app.post('/api/stripe', function (req, res, next){
     })
 })
 
-app.use( express.static( `${__dirname}/../build` ) );
 // pilot logout
 
 app.post("/api/logout", (req, res) => {
@@ -99,7 +99,7 @@ app.get('/api/upload', (req, res) => {
     };
         res.json(payload);
 
-})
+});
 const path = require('path')
 app.get('*', (req, res)=>{
   res.sendFile(path.join(__dirname, '../build/index.html'));

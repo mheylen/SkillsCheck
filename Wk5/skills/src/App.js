@@ -10,7 +10,7 @@ class App extends Component {
     super()
     this.state ={
       productInput: [],
-      productsList: [],
+      productList: [],
     };
   };
 componentDidMount(){
@@ -22,28 +22,36 @@ getAllProducts = () => {
   axios
   .get("/api/products").then(response => {
     this.setState({
-      productsList: response.data
+      ProductList: response.data
     })
   })
 }
 
 addToList = item => {
- const {productsList} = this.state
+ const {productList} = this.state
+ 
   const addItem = {
    id: item.id,
    name: item.name,
    image_path: item.image_path,
    price: item.price
   }; 
+  
+  axios
+  .post('/api/products', addItem).then(res => {
+    this.setState({
+      productList: res.data
+    });
+  });
 };
 
   render() {
-    const {productsList} = this.state
-    const mappedProducts = productsList.map(productsList => {
+    const {ProductList} = this.state
+    const mappedProducts = productList.map(productList => {
       return (
-        <div key={productsList.id}>
-        <h1>{productsList.name}</h1>
-        <h2>{productsList.price}</h2>
+        <div key={productList.id}>
+        <h1>{productList.name}</h1>
+        <h2>{productList.price}</h2>
         </div>
       )
     })

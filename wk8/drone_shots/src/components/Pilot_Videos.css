@@ -1,10 +1,12 @@
-.videos {
-    
+.pilotView{
+    display: flex;
+    width: 80%;
+    flex-direction: row;
     align-self: center;
     flex-wrap: wrap;
     justify-content: space-evenly;
     position: relative;
-    align-content: center;
-    height: 4px;
-    width: 4px;
-}
+    align-content: left;
+    height: 75%;
+    margin:5px;
+  }

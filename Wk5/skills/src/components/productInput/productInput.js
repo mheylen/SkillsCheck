@@ -5,7 +5,7 @@ export default function ProductInput(props){
     let mappedProducts = props.productInput.map(item => {
         return (
         <div>
-            <div className="productList-container" key={item.id}>
+            <div className="productInput-container" key={item.id}>
                 <p>Image URL:</p>
                 <input type="text" value> ==$0 </input>
                 <p>Product Name:</p>

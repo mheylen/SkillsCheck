@@ -8,7 +8,7 @@ app.use(bodyParcer.json());
 
 massive(process.env.CONNECTION_STRING).then(db => {
     app.set('db', db);
-    db.dummyData();
+    db.get_all_products();
     console.log('connected to db');
 });
 
